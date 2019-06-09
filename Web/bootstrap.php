@@ -7,7 +7,7 @@ if (!isset($_GET['app']) || !file_exists(__DIR__.'/../App/'.$_GET['app'])) $_GET
 // On commence par inclure la classe nous permettant d'enregistrer nos autoload
 require __DIR__.'/../lib/JFBlog/SplClassLoader.php';
 
-// On va ensuite enregistrer les autoloads correspondant à chaque vendor (OCFram, App, Model, etc.)
+// On va ensuite enregistrer les autoloads correspondant à chaque vendor (JFBlog, App, Model, etc.)
 $JFBlogLoader = new SplClassLoader('JFBlog', __DIR__.'/../lib');
 $JFBlogLoader->register();
 
