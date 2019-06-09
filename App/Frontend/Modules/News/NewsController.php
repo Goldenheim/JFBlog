@@ -48,13 +48,12 @@ class NewsController extends BackController
       
       $this->page->addVar('title', $news->titre());
       $this->page->addVar('news', $news);
-      $this->page->addVar('comments', $this->managers->getManagerOf('Comments')->getListOf($news->id()));
     }
-
-  public function executeInsertComment(HTTPRequest $request)
+    
+    public function executeInsertComment(HTTPRequest $request)
     {
       $this->page->addVar('title', 'Ajout d\'un commentaire');
-      
+   
       if ($request->postExists('pseudo'))
       {
         $comment = new Comment([
@@ -62,21 +61,21 @@ class NewsController extends BackController
           'auteur' => $request->postData('pseudo'),
           'contenu' => $request->postData('contenu')
         ]);
-        
+   
         if ($comment->isValid())
         {
           $this->managers->getManagerOf('Comments')->save($comment);
-          
+   
           $this->app->user()->setFlash('Le commentaire a bien été ajouté, merci !');
-          
+   
           $this->app->httpResponse()->redirect('news-'.$request->getData('news').'.html');
         }
         else
         {
           $this->page->addVar('erreurs', $comment->erreurs());
         }
-        
+   
         $this->page->addVar('comment', $comment);
-      }
+        }
     }
 }
