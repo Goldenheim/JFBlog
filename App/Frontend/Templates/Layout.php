@@ -47,50 +47,21 @@
             <a class="nav-link" href="post.html">Chapitres</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
+            <a class="nav-link" href="admin/">Connexion</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Page Header -->
-  <header class="masthead" style="background-image: url('img/home-bg.jpg')">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 col-md-10 mx-auto">
-          <div class="site-heading">
-            <h1>Un billet pour l'Alaska</h1>
-            <span class="subheading">Un roman de Jean Forteroche</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
   <!-- Main Content -->
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <nav>
-              <ul>
-                <?php if ($user->isAuthenticated()) { ?>
-                <li><a href="/admin/">Admin</a></li>
-                <li><a href="/admin/news-insert.html">Ajouter une news</a></li>
-                <?php } ?>
-              </ul>
-            </nav>
-            
-            <div id="content-wrap">
-              <section id="main">
-                <?php if ($user->hasFlash()) echo '<p style="text-align: center;">', $user->getFlash(), '</p>'; ?>
-                
-                <?= $content ?>
-              </section>
+  <div id="content-wrap">
+        <section id="main">
+          <?php if ($user->hasFlash()) echo '<p style="text-align: center;">', $user->getFlash(), '</p>'; ?>
+          
+          <?= $content ?>
+        </section>
       </div>
-    </div>
-  </div>
 
   <hr>
 
