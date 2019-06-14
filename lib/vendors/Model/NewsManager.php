@@ -28,6 +28,12 @@ abstract class NewsManager extends Manager
    abstract public function count();
 
    /**
+    * Méthode renvoyant tous les chapitres du livre.
+    * @return news
+    */
+   abstract public function getAllList();
+
+   /**
       * Méthode permettant d'ajouter une news.
       * @param $news News La news à ajouter
       * @return void

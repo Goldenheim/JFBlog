@@ -13,7 +13,7 @@
     </title>
 
   <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap/css/bootstrap.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
   <link href="css/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -108,7 +108,7 @@
 
   <!-- Custom scripts for this template -->
   <script src="js/clean-blog.min.js"></script>
-
+  <script src="js/pagination.js"></script>
 </body>
 
 </html>

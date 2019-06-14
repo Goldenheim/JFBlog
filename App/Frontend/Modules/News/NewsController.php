@@ -27,7 +27,7 @@ class NewsController extends BackController
       if (strlen($news->contenu()) > $nombreCaracteres)
       {
         $debut = substr($news->contenu(), 0, $nombreCaracteres);
-        $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
+        $debut = substr($debut, 0, strrpos($debut, ' ')) . ' [...]';
  
         $news->setContenu($debut);
       }
@@ -84,5 +84,32 @@ class NewsController extends BackController
     $this->page->addVar('comment', $comment);
     $this->page->addVar('form', $form->createView());
     $this->page->addVar('title', 'Ajout d\'un commentaire');
+  }
+
+  public function executeChapters(HTTPRequest $request)
+  {
+
+    $nombreCaracteres = $this->app->config()->get('nombre_caracteres');
+ 
+    // On ajoute une définition pour le titre.
+    $this->page->addVar('title', 'Tous les chapitres');
+ 
+    // On récupère le manager des news.
+    $manager = $this->managers->getManagerOf('News');
+ 
+    $listeAllNews = $manager->getAllList();
+ 
+    foreach ($listeAllNews as $allNews)
+    {
+      if (strlen($allNews->contenu()) > $nombreCaracteres)
+      {
+        $debut = substr($allNews->contenu(), 0, $nombreCaracteres);
+        $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
+ 
+        $allNews->setContenu($debut);
+      }
+    }
+    // On ajoute la variable $listeAllNews à la vue.
+    $this->page->addVar('listeAllNews', $listeAllNews);
   }
 }
