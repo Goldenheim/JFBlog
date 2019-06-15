@@ -26,4 +26,16 @@ class ConnexionController extends BackController
       }
     }
   }
+
+  public function executeLogout(HTTPRequest $request)
+  { 
+    // Suppression des variables de session et de la session
+    $_SESSION = array();
+    session_destroy();
+
+    // Suppression des cookies de connexion automatique
+    setcookie('login', '');
+    setcookie('pass', '');
+    $this->app->httpResponse()->redirect('/');
+  }
 }

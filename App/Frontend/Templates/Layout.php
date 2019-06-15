@@ -46,9 +46,19 @@
           <li class="nav-item">
             <a class="nav-link" href="post.html">Chapitres</a>
           </li>
+          <?php if ($user->isAuthenticated()) { ?>
+            <li class="btn-group nav-item"> 
+            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="">Action(s)<span class="caret"></span></a>
+            <ul class="dropdown-menu dropdown-menu-right">
+            <li class="nav-item"> <a class="nav-link" href="/admin/logout.html"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/admin/"><i class="fas fa-tools"></i> Administration</a></li>
+            </ul>
+            </li>
+          <?php } else { ?>
           <li class="nav-item">
             <a class="nav-link" href="admin/">Connexion</a>
           </li>
+        <?php } ?>
         </ul>
       </div>
     </div>
@@ -56,10 +66,17 @@
 
   <!-- Main Content -->
   <div id="content-wrap">
-        <section id="main">
-          <?php if ($user->hasFlash()) echo '<p style="text-align: center;">', $user->getFlash(), '</p>'; ?>
-          
+        <section id="main">      
           <?= $content ?>
+          <div class="modal" id="infos">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body">
+                    <?php if ($user->hasFlash()) echo '<p id="modal">', $user->getFlash(), '<button type="button" class="close" data-dismiss="modal">x</button></p>'; ?> 
+                </div>
+              </div>
+            </div>
+          </div>  
         </section>
       </div>
 
@@ -109,6 +126,12 @@
   <!-- Custom scripts for this template -->
   <script src="js/clean-blog.min.js"></script>
   <script src="js/pagination.js"></script>
+  <script>
+      let flash = $("#modal");
+      if (flash.text() != "") {
+        $('.modal').modal('show');
+      }
+    </script>
 </body>
 
 </html>

@@ -104,12 +104,20 @@ class NewsController extends BackController
       if (strlen($allNews->contenu()) > $nombreCaracteres)
       {
         $debut = substr($allNews->contenu(), 0, $nombreCaracteres);
-        $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
+        $debut = substr($debut, 0, strrpos($debut, ' ')) . ' [...]';
  
         $allNews->setContenu($debut);
       }
     }
     // On ajoute la variable $listeAllNews à la vue.
     $this->page->addVar('listeAllNews', $listeAllNews);
+  }
+
+  public function executeReportComment(HTTPRequest $request) {
+    $comment = $this->managers->getManagerOf('Comments')->report($request->getData('id'));
+    $news = $this->managers->getManagerOf('Comments')->get($request->getData('id'));
+    
+    $this->app->user()->setFlash('Le commentaire a bien été signalé');
+    $this->app->httpResponse()->redirect('news-'.$news.'.html');
   }
 }

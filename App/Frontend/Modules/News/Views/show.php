@@ -36,10 +36,18 @@ else
 	<fieldset>
 	  <legend>
 	    Posté par <strong><?= htmlspecialchars($comment['auteur']) ?></strong> le <?= $comment['date']->format('d/m/Y à H\hi') ?>
-	    <?php if ($user->isAuthenticated()) { ?> -
-	      <a href="admin/comment-update-<?= $comment['id'] ?>.html">Modifier</a> |
-	      <a href="admin/comment-delete-<?= $comment['id'] ?>.html">Supprimer</a>
-	    <?php } ?>
+	    	<div class="btn-group"> 
+	    	  <button class="btn btn-info">Action(s)</button>
+  			  <button class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+	    	  <ul class="dropdown-menu">
+	    	  	<?php if ($user->isAuthenticated()) { ?> 
+	    	    <li class="nav-item"><a class="nav-link" href="admin/comment-update-<?= $comment['id'] ?>.html"><i class="fas fa-edit"> Modifier</i></a></li>
+	    	    <li class="nav-item"><a class="nav-link" href="admin/comment-delete-<?= $comment['id'] ?>.html"><i class="fas fa-trash"> Supprimer</i></a></a></li>
+	    	    <?php } else { ?>
+	    	    <li class="nav-item"><a class="nav-link" href="/comment-report-<?= $comment['id'] ?>.html"><i class="fas fa-flag"> Signaler</i></a></li>
+	    	    <?php	} ?>
+	    	  </ul>
+	    	</div>  
 	  </legend>
 	  <p><?= nl2br(htmlspecialchars($comment['contenu'])) ?></p>
 	</fieldset>
@@ -49,4 +57,12 @@ else
 ?>
 
 <p><a href="commenter-<?= $news['id'] ?>.html">Ajouter un commentaire</a></p>
+<div class="container"> 
+	<button data-toggle="modal" href="commenter-<?= $news['id'] ?>.html" data-target="#infos" class="btn btn-primary">Ajouter un commentaire</button>
+  <div class="modal fade" id="infos">
+    <div class="modal-dialog">  
+      <div class="modal-content"></div>  
+    </div> 
+  </div>
+</div>
 </div>

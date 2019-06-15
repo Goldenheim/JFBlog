@@ -3,6 +3,7 @@
   <p>
     <?= $form ?>
     
-    <input type="submit" value="Modifier" />
+    <input class="btn btn-primary" type="submit" value="Modifier" />
+    <input class="btn btn-primary" type="button" onclick="window.location.replace('/admin/')" value="Annuler" />
   </p>
 </form>
