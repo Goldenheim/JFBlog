@@ -49,7 +49,7 @@ else
 	    	  </ul>
 	    	</div>  
 	  </legend>
-	  <p><?= nl2br(htmlspecialchars($comment['contenu'])) ?></p>
+	  <p><?= nl2br($comment['contenu']) ?></p>
 	</fieldset>
 	<?php
 	}
@@ -57,12 +57,4 @@ else
 ?>
 
 <p><a href="commenter-<?= $news['id'] ?>.html">Ajouter un commentaire</a></p>
-<div class="container"> 
-	<button data-toggle="modal" href="commenter-<?= $news['id'] ?>.html" data-target="#infos" class="btn btn-primary">Ajouter un commentaire</button>
-  <div class="modal fade" id="infos">
-    <div class="modal-dialog">  
-      <div class="modal-content"></div>  
-    </div> 
-  </div>
-</div>
 </div>

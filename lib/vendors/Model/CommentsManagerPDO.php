@@ -41,6 +41,20 @@ class CommentsManagerPDO extends CommentsManager
       return $comments;
     }
 
+  public function getReportList()
+  {
+    $sql = 'SELECT id, auteur, contenu FROM comments WHERE report = 1';
+    
+    $requete = $this->dao->query($sql);
+    $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');
+    
+    $reportList = $requete->fetchAll();
+    
+    $requete->closeCursor();
+    
+    return $reportList;
+  }  
+
   protected function modify(Comment $comment)
   {
     $q = $this->dao->prepare('UPDATE comments SET auteur = :auteur, contenu = :contenu WHERE id = :id');
@@ -71,6 +85,15 @@ class CommentsManagerPDO extends CommentsManager
   public function deleteFromNews($news)
   {
     $this->dao->exec('DELETE FROM comments WHERE news = '.(int) $news);
+  }
+
+  public function getNews($id)
+  {
+    $q = $this->dao->prepare('SELECT news FROM comments WHERE id = '.(int) $id);
+
+    $q->execute();
+  
+    return $newsId = $q->fetch();
   }
 
   public function report($id) 

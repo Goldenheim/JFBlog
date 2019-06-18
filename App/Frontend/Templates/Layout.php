@@ -68,11 +68,11 @@
   <div id="content-wrap">
         <section id="main">      
           <?= $content ?>
-          <div class="modal" id="infos">
+          <div class="modal fade" id="infos">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-body">
-                    <?php if ($user->hasFlash()) echo '<p id="modal">', $user->getFlash(), '<button type="button" class="close" data-dismiss="modal">x</button></p>'; ?> 
+                    <?php if ($user->hasFlash()) echo '<p id="modal">' . $user->getFlash() . '<button type="button" class="close" data-dismiss="modal">x</button></p>'; ?> 
                 </div>
               </div>
             </div>
