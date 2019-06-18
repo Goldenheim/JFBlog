@@ -24,54 +24,55 @@
   </head>
  
   <body>
-            <?php if ($user->isAuthenticated()) { ?>
-            <!-- Navigation -->
-            <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-              <div class="container">
-                <a class="navbar-brand" href="/"><i class="fas fa-undo-alt"></i> Retour au blog</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                  Menu
-                  <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                  <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                      <a class="nav-link" href="/admin/">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="/admin/news-insert.html">Ajouter une news</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="/admin/logout.html"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
-                    </li>
-                  </ul>
+      <?php if ($user->isAuthenticated()) { ?>
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand" href="/"><i class="fas fa-undo-alt"></i> Retour au blog</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/">Accueil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/news-insert.html">Ajouter une news</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/logout.html"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <?php } else { ?>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+          <div class="container">
+            <a class="navbar-brand" href="/">Retour au blog</a>
+            </div>
+          </div>
+        </nav>
+        <header class="masthead" style="background-image: url('/img/login-bg.jpg')">
+          <div class="overlay"></div>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12 col-md-10 mx-auto">
+                <div class="site-heading">
+                  <h1>Connexion</h1>
+                  <span class="subheading">Espace d'administration</span>
                 </div>
               </div>
-            </nav>
-            <?php } else { ?>
-              <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-                <div class="container">
-                  <a class="navbar-brand" href="/">Retour au blog</a>
-                  </div>
-                </div>
-              </nav>
-              <header class="masthead" style="background-image: url('/img/login-bg.jpg')">
-                <div class="overlay"></div>
-                <div class="container">
-                  <div class="row">
-                    <div class="col-lg-12 col-md-10 mx-auto">
-                      <div class="site-heading">
-                        <h1>Connexion</h1>
-                        <span class="subheading">Espace d'administration</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </header>
-            <?php } ?>
+            </div>
+          </div>
+        </header>
+      <?php } ?>
  
-      <div id="content-wrap">
+      <div id="content-wrap" class="col-lg-12 col-md-10 mx-auto">
         <section id="main">
+          <br>
           <?= $content ?>
           <div class="modal" id="infos">
             <div class="modal-dialog">
@@ -124,6 +125,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>     
     <script src="https://cdn.tiny.cloud/1/h65p3hjp48q4mpytx1k442wdyfni394z41fwpaggb67jg9f7/tinymce/5/tinymce.min.js"></script>  
+    <script src="/js/pagination.js"></script>
     <script src="/js/tinymce/tinymce.js"></script>  
     <script src="/js/tinymce/langs/fr_FR.js"></script>  
     <script>

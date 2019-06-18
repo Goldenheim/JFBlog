@@ -1,17 +1,24 @@
-<div>
-  <h2 class="col-sm-4 mx-auto">Veuillez vous identifier</h2>
+<div class="row">
+  <h2 class="mx-auto">Veuillez-vous identifier</h2>
 </div>
 
-<div class="col-sm-3 mx-auto">
-	<form action="" method="post" >
-	  <label>Pseudo</label>
-	  <input type="text" name="login" /><br />
-	  
-	  <label>Mot de passe</label>
-	  <input type="password" name="password" /><br /><br />
-	  
-	  <button class="btn btn-primary" type="submit">Connexion</button>
-	</form>
-</div>
+<form class="col-lg-3 mx-auto" action="" method="post" >
 
-  <hr>
+  
+  <div class="form-group">
+  	<label for="login" class="control-label">Pseudo:</label>
+  	<input type="text" name="login" class="form-control" id="login" />
+  </div>
+
+  
+  <div class="form-group">
+  	<label>Mot de passe: </label>
+  	<input type="password" name="password" class="form-control" />
+  </div>	  
+
+  <div class="row">
+  	<button class="btn btn-success mx-auto" type="submit">Connexion</button>
+  </div>
+</form>
+
+<hr/>
