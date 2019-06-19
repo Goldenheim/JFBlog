@@ -34,12 +34,37 @@ class NewsController extends BackController
  
   public function executeIndex(HTTPRequest $request)
   {
+    $show_per_page = $this->app->config()->get('pages');
     $this->page->addVar('title', 'Administration du blog');
  
     $manager = $this->managers->getManagerOf('News');
  
-    $this->page->addVar('listeNews', $manager->getList());
     $this->page->addVar('nombreNews', $manager->count());
+
+    $total = $manager->count();
+    $nombreDePages=ceil($total/$show_per_page);
+
+    if(isset($_GET['page'])) // Si la variable $_GET['page'] existe...
+    {
+         $pageActuelle=intval($_GET['page']);
+     
+         if($pageActuelle>$nombreDePages) // Si la valeur de $pageActuelle (le numéro de la page) est plus grande que $nombreDePages...
+         {
+              $pageActuelle=$nombreDePages;
+         }
+    }
+    else // Sinon
+    {
+         $pageActuelle=1; // La page actuelle est la n°1 
+    }   
+
+    $premiereEntree=($pageActuelle-1)*$show_per_page; // On calcul la première entrée à lire
+     
+    // La requête sql pour récupérer les messages de la page actuelle.
+    
+    $this->page->addVar('pageActuelle', $pageActuelle);
+    $this->page->addVar('Pages', $nombreDePages);
+    $this->page->addVar('listeNews', $manager->getList($premiereEntree, $show_per_page));
 
     $managerComment = $this->managers->getManagerOf('Comments');
     

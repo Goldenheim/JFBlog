@@ -51,7 +51,7 @@
             <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="">Action(s)<span class="caret"></span></a>
             <ul class="dropdown-menu dropdown-menu-right">
             <li class="nav-item"> <a class="nav-link" href="/admin/logout.html"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
-            <li class="nav-item"> <a class="nav-link" href="/admin/"><i class="fas fa-tools"></i> Administration</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/admin/page=1.html"><i class="fas fa-tools"></i> Administration</a></li>
             </ul>
             </li>
           <?php } else { ?>
