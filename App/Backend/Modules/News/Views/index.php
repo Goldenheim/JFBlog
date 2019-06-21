@@ -40,12 +40,12 @@
 			<div class="row">
 				<table class="table table-striped table-condensed">
 				  <thead>Des commentaires ont été signalés :</thead>
-				  <tr><th>Auteur</th><th>Contenu</th><th>Action</th></tr>
+				  <tr><th>Auteur</th><th>Contenu</th><th>Article(s)</th><th>Action</th></tr>
 
 				<?php
 				foreach ($listeReport as $report)
 				{
-				  echo '<tr><td>', $report['auteur'], '</td><td>', $report['contenu'], '</a></td><td><a href="comment-update-', $report['id'],'.html"><i class="fas fa-edit"> Modifier </i></a> <a href="comment-delete-', $report['id'], '.html"><i class="fas fa-trash"> Supprimer</i></a></td></tr>', "\n";
+				  echo '<tr><td>', $report['auteur'], '</td><td>', $report['contenu'], '</td><td>', $report['titre'], '</td><td><a href="comment-update-', $report['id'],'.html"><i class="fas fa-edit"> Modifier </i></a> <a href="comment-delete-', $report['id'], '.html"><i class="fas fa-trash"> Supprimer</i></a></td></tr>', "\n";
 				}
 				?>
 

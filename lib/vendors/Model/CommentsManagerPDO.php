@@ -25,7 +25,7 @@ class CommentsManagerPDO extends CommentsManager
         throw new \InvalidArgumentException('L\'identifiant de la news passé doit être un nombre entier valide');
       }
       
-      $q = $this->dao->prepare('SELECT id, news, auteur, contenu, date FROM comments WHERE news = :news');
+      $q = $this->dao->prepare('SELECT id, news, auteur, contenu, report, date FROM comments WHERE news = :news');
       $q->bindValue(':news', $news, \PDO::PARAM_INT);
       $q->execute();
       
@@ -43,10 +43,10 @@ class CommentsManagerPDO extends CommentsManager
 
   public function getReportList()
   {
-    $sql = 'SELECT id, auteur, contenu FROM comments WHERE report = 1';
+    $sql = 'SELECT comments.id, comments.auteur, comments.contenu, news.titre AS titre FROM comments INNER JOIN news ON comments.news = news.id WHERE report = 1';
     
     $requete = $this->dao->query($sql);
-    $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');
+    $requete->setFetchMode();
     
     $reportList = $requete->fetchAll();
     
@@ -57,7 +57,7 @@ class CommentsManagerPDO extends CommentsManager
 
   protected function modify(Comment $comment)
   {
-    $q = $this->dao->prepare('UPDATE comments SET auteur = :auteur, contenu = :contenu WHERE id = :id');
+    $q = $this->dao->prepare('UPDATE comments SET auteur = :auteur, contenu = :contenu, report = 2 WHERE id = :id');
     
     $q->bindValue(':auteur', $comment->auteur());
     $q->bindValue(':contenu', $comment->contenu());
@@ -68,7 +68,7 @@ class CommentsManagerPDO extends CommentsManager
   
   public function get($id)
   {
-    $q = $this->dao->prepare('SELECT id, news, auteur, contenu FROM comments WHERE id = :id');
+    $q = $this->dao->prepare('SELECT id, news, auteur, contenu, report FROM comments WHERE id = :id');
     $q->bindValue(':id', (int) $id, \PDO::PARAM_INT);
     $q->execute();
     

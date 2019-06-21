@@ -35,7 +35,7 @@ else
 	?>
 	<fieldset>
 	  <legend>
-	    Posté par <strong><?= htmlspecialchars($comment['auteur']) ?></strong> le <?= $comment['date']->format('d/m/Y à H\hi') ?>
+	    Posté par <strong><?= htmlspecialchars($comment['auteur']) ?></strong> le <?= $comment['date']->format('d/m/Y à H\hi') ?> 
 	    	<div class="btn-group"> 
 	    	  <button class="btn btn-info">Action(s)</button>
   			  <button class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
@@ -49,7 +49,14 @@ else
 	    	  </ul>
 	    	</div>  
 	  </legend>
-	  <p><?= nl2br($comment['contenu']) ?></p>
+	  <?= nl2br($comment['contenu']);
+	   if ($comment['report'] == 2) 
+	   	{ 
+   		?>
+	   		<p style="text-align: right;"><small><em style="color: red;">Édité par Jean Forteroche</small></em></p>
+		<?php 
+		} 
+	   	?>
 	</fieldset>
 	<?php
 	}
