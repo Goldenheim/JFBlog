@@ -18,6 +18,16 @@ class CommentsManagerPDO extends CommentsManager
     $comment->setId($this->dao->lastInsertId());
   }
 
+  public function answer(Comment $comment, $answer)
+  {
+    $q = $this->dao->prepare('UPDATE comments SET answer = :answer WHERE id = :id');
+    
+    $q->bindValue(':id', $comment->id(), \PDO::PARAM_INT);
+    $q->bindValue(':answer', $answer);
+    
+    $q->execute();
+  }
+
   public function getListOf($news)
     {
       if (!ctype_digit($news))
@@ -25,7 +35,7 @@ class CommentsManagerPDO extends CommentsManager
         throw new \InvalidArgumentException('L\'identifiant de la news passé doit être un nombre entier valide');
       }
       
-      $q = $this->dao->prepare('SELECT id, news, auteur, contenu, report, date FROM comments WHERE news = :news');
+      $q = $this->dao->prepare('SELECT id, news, auteur, contenu, answer, report, date FROM comments WHERE news = :news');
       $q->bindValue(':news', $news, \PDO::PARAM_INT);
       $q->execute();
       
@@ -43,7 +53,7 @@ class CommentsManagerPDO extends CommentsManager
 
   public function getReportList()
   {
-    $sql = 'SELECT comments.id, comments.auteur, comments.contenu, news.titre AS titre FROM comments INNER JOIN news ON comments.news = news.id WHERE report = 1';
+    $sql = 'SELECT comments.id, comments.auteur, comments.contenu, comments.news , news.titre AS titre FROM comments INNER JOIN news ON comments.news = news.id WHERE report = 1';
     
     $requete = $this->dao->query($sql);
     $requete->setFetchMode();
@@ -68,7 +78,7 @@ class CommentsManagerPDO extends CommentsManager
   
   public function get($id)
   {
-    $q = $this->dao->prepare('SELECT id, news, auteur, contenu, report FROM comments WHERE id = :id');
+    $q = $this->dao->prepare('SELECT id, news, auteur, contenu, date, report FROM comments WHERE id = :id');
     $q->bindValue(':id', (int) $id, \PDO::PARAM_INT);
     $q->execute();
     
@@ -104,5 +114,19 @@ class CommentsManagerPDO extends CommentsManager
     $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
     
     $requete->execute();
+  }
+
+  public function getList()
+  {
+    $sql = 'SELECT comments.id, comments.auteur, comments.date, comments.contenu, comments.news, news.titre AS titre FROM comments INNER JOIN news ON comments.news = news.id ORDER BY comments.date DESC LIMIT 0,5';
+    
+    $requete = $this->dao->query($sql);
+    $requete->setFetchMode();
+    
+    $lastCom = $requete->fetchAll();
+    
+    $requete->closeCursor();
+    
+    return $lastCom;
   }
 }

@@ -7,7 +7,8 @@
 	  <p>
 	    <?= $form ?>
 	    
-	    <input type="submit" value="Commenter" />
+	    <input class="btn btn-primary" type="submit" value="Répondre" />
+		<input class="btn btn-primary" type="button" onclick="window.location.replace('/')" value="Annuler" />
 	  </p>
 	</form>
 </div>

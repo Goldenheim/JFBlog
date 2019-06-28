@@ -69,13 +69,14 @@ class NewsController extends BackController
     $managerComment = $this->managers->getManagerOf('Comments');
     
     $this->page->addVar('listeReport', $managerComment->getReportList());
+    $this->page->addVar('lastCom', $managerComment->getList());
   }
  
   public function executeInsert(HTTPRequest $request)
   {
     $this->processForm($request);
  
-    $this->page->addVar('title', 'Ajout d\'une news');
+    $this->page->addVar('title', 'Ajout d\'un article');
   }
  
   public function executeUpdate(HTTPRequest $request)
@@ -85,6 +86,20 @@ class NewsController extends BackController
     $this->page->addVar('title', 'Modification d\'une news');
   }
  
+  public function executeAnswerComment(HTTPRequest $request)
+  {
+    $this->page->addVar('title', 'Répondre à un commentaire');
+    $comment = $this->managers->getManagerOf('Comments')->get($request->getData('id'));
+    if (isset($_POST["answer"])) 
+    {
+      $answer = $request->postdata('answer');
+      $this->managers->getManagerOf('Comments')->answer($comment, $answer);
+      $this->app->user()->setFlash('Votre réponse à bien été publié');     
+      $this->app->httpResponse()->redirect('/admin/');
+    }
+    $this->page->addVar('comment', $comment);
+  }
+
   public function executeUpdateComment(HTTPRequest $request)
   {
     $this->page->addVar('title', 'Modification d\'un commentaire');
@@ -112,7 +127,7 @@ class NewsController extends BackController
     if ($formHandler->process())
     {
       $this->app->user()->setFlash('Le commentaire a bien été modifié');
- 
+      
       $this->app->httpResponse()->redirect('/admin/');
     }
  

@@ -120,7 +120,11 @@ class NewsController extends BackController
 
     if ($comment['report'] == 1) {
       $this->app->user()->setFlash('Le commentaire a déjà été signalé');
-    } else 
+    } else if ($comment['report'] == 2) 
+    {
+      $this->app->user()->setFlash('Ce commentaire a déjà été édité par l\'administrateur');
+    } 
+    else 
     {
       $manager->report($request->getData('id'));
       $this->app->user()->setFlash('Le commentaire a bien été signalé');

@@ -20,12 +20,17 @@
 <?php if ($news['dateAjout'] != $news['dateModif']) { ?>
   <p style="text-align: right;"><small><em>Modifiée le <?= $news['dateModif']->format('d/m/Y à H\hi') ?></em></small></p>
 <?php } ?>
-
+<div class="container">
+	<div class="row">
+		<h2 class="mx-auto">COMMENTAIRES</h2>
+	</div>
+</div>
+<hr>
 <?php
 if (empty($comments))
 {
 ?>
-<p>Aucun commentaire n'a encore été posté. Soyez le premier à en laisser un !</p>
+<p>Aucun commentaire n'a encore été posté pour cet article</p>
 <?php
 }
 else 
@@ -33,35 +38,49 @@ else
 	foreach ($comments as $comment)
 	{
 	?>
-	<fieldset>
-	  <legend>
-	    Posté par <strong><?= htmlspecialchars($comment['auteur']) ?></strong> le <?= $comment['date']->format('d/m/Y à H\hi') ?> 
-	    	<div class="btn-group"> 
-	    	  <button class="btn btn-info">Action(s)</button>
-  			  <button class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-	    	  <ul class="dropdown-menu">
-	    	  	<?php if ($user->isAuthenticated()) { ?> 
-	    	    <li class="nav-item"><a class="nav-link" href="admin/comment-update-<?= $comment['id'] ?>.html"><i class="fas fa-edit"> Modifier</i></a></li>
-	    	    <li class="nav-item"><a class="nav-link" href="admin/comment-delete-<?= $comment['id'] ?>.html"><i class="fas fa-trash"> Supprimer</i></a></a></li>
-	    	    <?php } else { ?>
-	    	    <li class="nav-item"><a class="nav-link" href="/comment-report-<?= $comment['id'] ?>.html"><i class="fas fa-flag"> Signaler</i></a></li>
-	    	    <?php	} ?>
-	    	  </ul>
-	    	</div>  
-	  </legend>
-	  <?= nl2br($comment['contenu']);
-	   if ($comment['report'] == 2) 
-	   	{ 
-   		?>
-	   		<p style="text-align: right;"><small><em style="color: red;">Édité par Jean Forteroche</small></em></p>
-		<?php 
-		} 
-	   	?>
-	</fieldset>
+	<div class="container" style="text-align: right;">
+			<fieldset>
+			  <legend style="margin: 0!important">
+			    Posté par <strong><?= htmlspecialchars($comment['auteur']) ?></strong> le <?= $comment['date']->format('d/m/Y à H\hi') ?> 
+			    	<div class="btn-group"> 
+			    	  <button class="btn btn-info">Action(s)</button>
+		  			  <button class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+			    	  <ul class="dropdown-menu">
+			    	  	<?php if ($user->isAuthenticated()) { ?> 
+			    	    <li class="nav-item"><a class="nav-link" href="admin/comment-update-<?= $comment['id'] ?>.html"><i class="fas fa-edit"> Modifier</i></a></li>
+			    	    <li class="nav-item"><a class="nav-link" href="admin/comment-delete-<?= $comment['id'] ?>.html"><i class="fas fa-trash"> Supprimer</i></a></a></li>
+			    	    <li class="nav-item"><a class="nav-link" href="admin/comment-answer-<?= $comment['id'] ?>.html"><i class="fas fa-feather-alt"> Répondre</i></a></a></li>
+			    	    <?php } else { ?>
+			    	    <li class="nav-item"><a class="nav-link" href="/comment-report-<?= $comment['id'] ?>.html"><i class="fas fa-flag"> Signaler</i></a></li>
+			    	    <?php	} ?>
+			    	  </ul>
+			    	</div> 
+			  </legend>
+			   <?php
+			   if ($comment['report'] == 2) 
+			   	{ 
+		   			echo '<p id="comment-'.$comment['id'].'">'.nl2br($comment['contenu']).'<small><em> Édité par Jean Forteroche</small></em></p>'; ?>
+			   		
+				<?php 
+				} else 
+				{
+			   	echo '<p id="comment-'.$comment['id'].'">'.nl2br($comment['contenu']).'</P>';
+			 	}
+			 	if ($comment['answer'] != null) 
+			 	{
+		    		echo '<small><em style="color: red;">'.nl2br($comment['answer']).'</small></em>';
+		    	}	     
+			 ?>  	
+			</fieldset>
+	</div>
 	<?php
 	}
 }
 ?>
 
-<p><a href="commenter-<?= $news['id'] ?>.html">Ajouter un commentaire</a></p>
+<div class="container">
+	<div class="row">
+		<a class="mx-auto" href="commenter-<?= $news['id'] ?>.html"><button class="btn btn-info">Ajouter un commentaire</button></a>
+	</div>
+</div>
 </div>

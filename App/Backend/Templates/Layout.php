@@ -39,7 +39,7 @@
                 <a class="nav-link" href="/admin/">Accueil</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/admin/news-insert.html">Ajouter une news</a>
+                <a class="nav-link" href="/admin/news-insert.html">Ajouter un article</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/admin/logout.html"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>

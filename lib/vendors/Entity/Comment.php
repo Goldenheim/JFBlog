@@ -8,6 +8,7 @@ class Comment extends Entity
   protected $news,
             $auteur,
             $contenu,
+            $answer,
             $date;
 
   const AUTEUR_INVALIDE = 1;
@@ -43,6 +44,16 @@ class Comment extends Entity
     $this->contenu = $contenu;
   }
 
+  public function setAnswer($answer)
+  {
+    if (!is_string($answer) || empty($answer))
+    {
+      $this->erreurs[] = self::CONTENU_INVALIDE;
+    }
+
+    $this->answer = $answer;
+  }
+
   public function setDate(\DateTime $date)
   {
     $this->date = $date;
@@ -71,5 +82,10 @@ class Comment extends Entity
   public function report()
   {
     return $this->report;
+  }
+
+  public function answer()
+  {
+    return $this->answer;
   }
 }
