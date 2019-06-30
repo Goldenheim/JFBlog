@@ -116,6 +116,12 @@ class CommentsManagerPDO extends CommentsManager
     $requete->execute();
   }
 
+  public function reportCount()
+  {
+    return $this->dao->query('SELECT COUNT(*) FROM comments WHERE report = 1')->fetchColumn();
+  }
+
+
   public function getList()
   {
     $sql = 'SELECT comments.id, comments.auteur, comments.date, comments.contenu, comments.news, news.titre AS titre FROM comments INNER JOIN news ON comments.news = news.id ORDER BY comments.date DESC LIMIT 0,5';

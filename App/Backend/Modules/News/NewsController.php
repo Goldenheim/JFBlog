@@ -68,6 +68,7 @@ class NewsController extends BackController
 
     $managerComment = $this->managers->getManagerOf('Comments');
     
+    $this->page->addVar('nombreReport', $managerComment->reportCount());
     $this->page->addVar('listeReport', $managerComment->getReportList());
     $this->page->addVar('lastCom', $managerComment->getList());
   }
@@ -97,6 +98,7 @@ class NewsController extends BackController
       $this->app->user()->setFlash('Votre réponse à bien été publié');     
       $this->app->httpResponse()->redirect('/admin/');
     }
+    
     $this->page->addVar('comment', $comment);
   }
 

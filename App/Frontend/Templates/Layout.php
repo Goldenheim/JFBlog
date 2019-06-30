@@ -4,6 +4,7 @@
 <head>
 
   <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="img/cropped-favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -69,7 +70,7 @@
         <section id="main">      
           <?= $content ?>
           <div class="modal fade" id="infos">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-body">
                     <?php if ($user->hasFlash()) echo '<p id="modal">' . $user->getFlash() . '<button type="button" class="close" data-dismiss="modal">x</button></p>'; ?> 

@@ -6,7 +6,9 @@
 
 		<div class="row">
 			<table class="table table-striped table-condensed">
-			  <tr><th>Auteur</th><th>Titre</th><th>Date d'ajout</th><th>Dernière modification</th><th>Action</th></tr>
+				<thead class="thead-dark">
+					<tr><th>Auteur</th><th>Titre</th><th>Date d'ajout</th><th>Dernière modification</th><th>Action</th></tr>
+				</thead>
 			<?php
 			foreach ($listeNews as $news)
 			{
@@ -31,45 +33,55 @@
 		}
 		echo ' ]</p></div>' ?>
 		</section>
-		<div class="row">
-			<section class="col-lg-6 col-xs-10 table-responsive">
-				<div class="row">
-					<table class="table table-striped table-condensed">
-					  <thead>Liste des 5 derniers commentaires:</thead>
-					  <tr><th>Auteur</th><th>Contenu</th><th>Date</th><th>Article(s)</th><th>Action</th></tr>
+		<section class="container">
+			<div class="row">
+				<section class="col-lg-6 col-xs-10 table-responsive">
+					<div class="row">
+						<p class="mx-auto">Liste des 5 derniers commentaires:</p>
+					</div>
 
-					<?php
-					foreach ($lastCom as $com)
-					{
-					  echo '<tr><td>', $com['auteur'], '</td><td><a href="/news-', $com['news'],'.html#comment-', $com['id'],'">', $com['contenu'], '</a></td><td>', $com['date'], '</td><td><a href="/news-', $com['news'],'.html">', $com['titre'], '</a></td><td><a href="comment-update-', $com['id'],'.html"><i class="fas fa-edit"></i></a> <a href="comment-delete-', $com['id'], '.html"><i class="fas fa-trash"></i></a></td></tr>', "\n";
-					}
-					?>
+					<div class="row">
+						<table class="table table-sm table-striped table-condensed">
+							
+						  <thead class="thead-dark">
+						  <tr><th>Auteur</th><th colspan="2">Contenu</th><th>Date</th><th>Article(s)</th><th>Action</th></tr></thead>
 
-					</table>
-				</div>	
-			</section>
-			<?php
-			if ($listeReport != Null) {	
-			?> 
-			<section class="offset-lg-1 col-lg-5 col-xs-10 table-responsive">
-				<div class="row">
-					<table class="table table-striped table-condensed">
-					  <thead>Des commentaires ont été signalés :</thead>
-					  <tr><th>Auteur</th><th>Contenu</th><th>Article(s)</th><th>Action</th></tr>
+						<?php
+						foreach ($lastCom as $com)
+						{
+						  echo '<tr><td>', $com['auteur'], '</td><td colspan="2"><a href="/news-', $com['news'],'.html#comment-', $com['id'],'">', $com['contenu'], '</a></td><td>', $com['date'], '</td><td><a href="/news-', $com['news'],'.html">', $com['titre'], '</a></td><td><a href="comment-update-', $com['id'],'.html"><i class="fas fa-edit"></i></a> <a href="comment-delete-', $com['id'], '.html"><i class="fas fa-trash"></i></a></td></tr>', "\n";
+						}
+						?>
 
-					<?php
-					foreach ($listeReport as $report)
-					{
-					  echo '<tr><td>', $report['auteur'], '</td><td><a href="/news-', $report['news'],'.html#comment-', $com['id'],'">', $report['contenu'], '</a></td><td>', $report['titre'], '</td><td><a href="comment-update-', $report['id'],'.html"><i class="fas fa-edit"></i></a> <a href="comment-delete-', $report['id'], '.html"><i class="fas fa-trash"></i></a></td></tr>', "\n";
-					}
-					?>
+						</table>
+					</div>	
+				</section>
+				<?php
+				if ($listeReport != Null) {	
+				?> 
+				<section class="offset-lg-1 col-lg-5 col-xs-10 table-responsive">
+					<div class="row">
+						<p class="mx-auto"><?= $nombreReport ?> commentaire(s) ont été signalé(s) :</p>
+					</div>
+					<div class="row">
+						<table class="table table-sm table-danger table-hover table-borderless table-condensed">
+						  <thead class="thead-light">
+						  <tr><th>Auteur</th><th>Contenu</th><th>Article(s)</th><th>Action</th></tr>
+						</thead>
 
-					</table>
-				</div>	
-			</section>	
-			<?php
-			}
-			?>	
-		</div>	
+						<?php
+						foreach ($listeReport as $report)
+						{
+						  echo '<tr><td>', $report['auteur'], '</td><td><a href="/news-', $report['news'],'.html#comment-', $com['id'],'">', $report['contenu'], '</a></td><td>', $report['titre'], '</td><td><a href="comment-update-', $report['id'],'.html"><i class="fas fa-edit"></i></a> <a href="comment-delete-', $report['id'], '.html"><i class="fas fa-trash"></i></a></td></tr>', "\n";
+						}
+						?>
+
+						</table>
+					</div>	
+				</section>	
+				<?php
+				}
+				?>	
+			</div>	
+		</section>
 </div>
-	

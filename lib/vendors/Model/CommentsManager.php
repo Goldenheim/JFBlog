@@ -50,6 +50,12 @@ abstract class CommentsManager extends Manager
    * @return Comment
    */
   abstract public function get($id);
+
+  /**
+   * Méthode permettant d'obtenir les 5 derniers commentaires.
+   * @return listCom
+   */
+  abstract public function getList();
   
   /**
    * Méthode permettant de supprimer un commentaire.

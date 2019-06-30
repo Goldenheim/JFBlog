@@ -3,6 +3,7 @@
   <head>
 
     <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="/img/cropped-favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -29,6 +30,8 @@
       <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
           <a class="navbar-brand" href="/"><i class="fas fa-undo-alt"></i> Retour au blog</a>
+          <?php if (isset($nombreReport))
+                 echo '<a data-toggle="modal" href="#infos" class="badge badge-danger">' . $nombreReport . ' alerte(s)</a>' ?>
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fas fa-bars"></i>
@@ -36,7 +39,7 @@
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a class="nav-link" href="/admin/">Accueil</a>
+                <a class="nav-link" href="/admin/"><i class="fas fa-home"></i> Accueil</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/admin/news-insert.html">Ajouter un article</a>
@@ -82,11 +85,23 @@
                 </div>
               </div>
             </div>
-          </div>      
+          </div>  
+          <div class="modal" id="badge">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                      <?php echo '<a class="nav-link mx-auto" href="/" id="badge">' . $nombreReport .' commentaire(s) signalé(s)</a>'; ?> 
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>         
         </section>
       </div>
 
       <!-- Footer -->
+        <hr>
         <footer>
           <div class="container">
             <div class="row">
@@ -131,8 +146,12 @@
     <script>
       let flash = $("#modal");
       if (flash.text() != "") {
-        $('.modal').modal('show');
+        $('#infos').modal('show');
       }
+
+      $('.badge').click(e => {
+        $('.modal').modal('show');
+      });
     </script>
   </body>
 </html>

@@ -24,6 +24,10 @@
 }
 ?>
 
-<div class="col-lg-8 mx-auto">
-  <a href="/post.html">Tous les chapitres</a>
+<div class="container">
+  <div class="row">
+    <span class="mx-auto">
+      <a class="nav-link" href="/post.html">Tous les chapitres <i class="far fa-arrow-alt-circle-right"></i></a>
+    </span>
+  </div>
 </div>
