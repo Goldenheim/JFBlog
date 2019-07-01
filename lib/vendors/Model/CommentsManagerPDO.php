@@ -28,6 +28,25 @@ class CommentsManagerPDO extends CommentsManager
     $q->execute();
   }
 
+  public function deleteAnswer($id)
+  {
+    $this->dao->exec('UPDATE comments SET answer = "" WHERE id = '.(int) $id);
+  }
+
+  public function getAnswers()
+  {
+    $sql = 'SELECT comments.id, comments.auteur, comments.date, comments.contenu, comments.news,comments.answer, news.titre AS titre FROM comments INNER JOIN news ON comments.news = news.id ORDER BY comments.date DESC ';
+
+    $requete = $this->dao->query($sql);
+    $requete->setFetchMode();
+    
+    $answers = $requete->fetchAll();
+    
+    $requete->closeCursor();
+    
+    return $answers;
+  }
+
   public function getListOf($news)
     {
       if (!ctype_digit($news))
@@ -122,9 +141,14 @@ class CommentsManagerPDO extends CommentsManager
   }
 
 
-  public function getList()
+  public function getList($debut = -1, $limite = -1)
   {
-    $sql = 'SELECT comments.id, comments.auteur, comments.date, comments.contenu, comments.news, news.titre AS titre FROM comments INNER JOIN news ON comments.news = news.id ORDER BY comments.date DESC LIMIT 0,5';
+    $sql = 'SELECT comments.id, comments.auteur, comments.date, comments.contenu, comments.news, news.titre AS titre FROM comments INNER JOIN news ON comments.news = news.id ORDER BY comments.date DESC ';
+
+    if ($debut != -1 || $limite != -1)
+    {
+      $sql .= ' LIMIT '.(int) $limite.' OFFSET '.(int) $debut;
+    }
     
     $requete = $this->dao->query($sql);
     $requete->setFetchMode();

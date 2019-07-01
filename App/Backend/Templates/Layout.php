@@ -31,7 +31,7 @@
         <div class="container">
           <a class="navbar-brand" href="/"><i class="fas fa-undo-alt"></i> Retour au blog</a>
           <?php if (isset($nombreReport))
-                 echo '<a data-toggle="modal" href="#infos" class="badge badge-danger">' . $nombreReport . ' alerte(s)</a>' ?>
+                 echo '<i class="fas fa-comment-alt notify"><a data-toggle="modal" href="#infos"><span  class="badge badge-danger badge-notify">' . $nombreReport . '</span></a></i>' ?>
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fas fa-bars"></i>
@@ -91,7 +91,7 @@
               <div class="modal-content">
                 <div class="modal-body">
                     <div class="row">
-                      <?php echo '<a class="nav-link mx-auto" href="/" id="badge">' . $nombreReport .' commentaire(s) signalé(s)</a>'; ?> 
+                      <?php echo '<a class="nav-link mx-auto" href="report.html" id="badge">' . $nombreReport .' commentaire(s) signalé(s)</a>'; ?> 
                     </div>
                 </div>
               </div>
@@ -151,6 +151,17 @@
 
       $('.badge').click(e => {
         $('.modal').modal('show');
+      });
+      $(document).ready(function(){
+        $('.toast').toast('show');
+      });
+      $(document).ready(function(){
+        $("#search").on("keyup", function() {
+          var value = $(this).val().toLowerCase();
+          $("table tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+          });
+        });
       });
     </script>
   </body>

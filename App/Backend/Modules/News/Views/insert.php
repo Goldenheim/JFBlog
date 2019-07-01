@@ -1,4 +1,6 @@
-<h2>Ajouter un Article</h2>
+<div class="container-fluid">
+	<h2>Ajouter un Article</h2>
+</div>
 <form class="form" action="" method="post">
     <?= $form ?>
 	<div class="row">

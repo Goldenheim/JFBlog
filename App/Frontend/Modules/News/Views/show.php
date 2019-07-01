@@ -53,7 +53,7 @@ else
 				    	    <li class="nav-item"><a class="nav-link" href="admin/comment-update-<?= $comment['id'] ?>.html"><i class="fas fa-edit"> Modifier</i></a></li>
 				    	    <li class="nav-item"><a class="nav-link" href="admin/comment-delete-<?= $comment['id'] ?>.html"><i class="fas fa-trash"> Supprimer</i></a></li>
 				    	    <?php if ($comment['answer'] != null) { ?>
-				    	    		<li class="nav-item"><a class="nav-link" href=""><i class="fas fa-eraser"> Modifier la réponse</i></a></li>
+				    	    		<li class="nav-item"><a href="admin/Answer-delete-<?= $comment['id'] ?>.html"><i class="fas fa-eraser"> Modifier la réponse</i></a></li>
 				    	    	<?php
 				    	    	} else 
 				    	    	{ ?>

@@ -88,6 +88,24 @@ img::-moz-selection {
   background: transparent;
 }
 
+.badge-notify{
+  position:relative;
+  top: -20px;
+  left: -5px;
+  border: 1px solid white;
+}
+
+.notify {
+  color: white;
+  position: sticky;
+  top: 3%;
+} 
+
+#sticky {
+  position: sticky;
+  bottom: 0;
+} 
+
 #mainNav {
   position: relative!important;
   border-bottom: 1px solid #e9ecef;

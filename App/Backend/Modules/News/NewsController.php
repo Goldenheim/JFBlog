@@ -31,7 +31,54 @@ class NewsController extends BackController
  
     $this->app->httpResponse()->redirect('.');
   }
+
+  public function executeDeleteAnswer(HTTPRequest $request)
+  {
+    $this->managers->getManagerOf('Comments')->deleteAnswer($request->getData('id'));
  
+    $this->app->user()->setFlash('Votre réponse a bien été supprimé !');
+ 
+    $this->app->httpResponse()->redirect('.');
+  }
+
+  public function executeArticles(HTTPRequest $request) 
+  {
+    $this->page->addVar('title', 'Tous les articles');
+
+    $manager = $this->managers->getManagerOf('News');
+
+    $this->page->addVar('nombreNews', $manager->count());
+    $this->page->addVar('listeNews', $manager->getAllList());
+  }
+ 
+  public function executeComments(HTTPRequest $request) 
+  {
+    $this->page->addVar('title', 'Liste de tous les commentaires');
+
+    $manager = $this->managers->getManagerOf('Comments');
+
+    $this->page->addVar('comments', $manager->getList());
+  }
+
+  public function executeReport(HTTPRequest $request) 
+  {
+    $this->page->addVar('title', 'Tous les commentaires signalés');
+
+    $manager = $this->managers->getManagerOf('comments');
+
+    $this->page->addVar('nombreReport', $manager->reportCount());
+    $this->page->addVar('listeReport', $manager->getreportList());
+  }
+
+  public function executeAnswers(HTTPRequest $request) 
+  {
+    $this->page->addVar('title', 'Les réponses aux commentaires');
+
+    $manager = $this->managers->getManagerOf('comments');
+
+    $this->page->addVar('listeAnswers', $manager->getAnswers());
+  }
+
   public function executeIndex(HTTPRequest $request)
   {
     $show_per_page = $this->app->config()->get('pages');
@@ -70,7 +117,7 @@ class NewsController extends BackController
     
     $this->page->addVar('nombreReport', $managerComment->reportCount());
     $this->page->addVar('listeReport', $managerComment->getReportList());
-    $this->page->addVar('lastCom', $managerComment->getList());
+    $this->page->addVar('lastCom', $managerComment->getList(0,5));
   }
  
   public function executeInsert(HTTPRequest $request)
@@ -98,7 +145,7 @@ class NewsController extends BackController
       $this->app->user()->setFlash('Votre réponse à bien été publié');     
       $this->app->httpResponse()->redirect('/admin/');
     }
-    
+
     $this->page->addVar('comment', $comment);
   }
 
